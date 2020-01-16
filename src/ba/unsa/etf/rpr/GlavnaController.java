@@ -15,7 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.beans.XMLEncoder;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -139,6 +142,23 @@ public class GlavnaController {
             listGradovi.setAll(dao.gradovi());
         }
     }
+
+    public void actionZapisi(ActionEvent actionEvent){
+        Geografija g=new Geografija();
+        g.setDrzavae(dao.drzave());
+        g.setGradovi(dao.gradovi());
+        XMLEncoder ulaz = null;
+        try {
+            ulaz = new XMLEncoder(new FileOutputStream("geografija.xml"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+         ulaz.writeObject(g);
+        ulaz.close();
+
+    }
+
+
 
     // Metoda za potrebe testova, vraća bazu u polazno stanje
     public void resetujBazu() {

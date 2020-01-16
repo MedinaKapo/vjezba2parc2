@@ -5,12 +5,14 @@ public class Grad {
     private String naziv;
     private int brojStanovnika;
     private Drzava drzava;
-
-    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava) {
+    private int zagadjenost;
+    public Grad(int id, String naziv, int brojStanovnika, Drzava drzava,int zagadjenost) {
         this.id = id;
         this.naziv = naziv;
         this.brojStanovnika = brojStanovnika;
         this.drzava = drzava;
+        if(zagadjenost<1 || zagadjenost>10)throw new IllegalArgumentException();
+        this.zagadjenost=zagadjenost;
     }
 
     public Grad() {
@@ -50,4 +52,13 @@ public class Grad {
 
     @Override
     public String toString() { return naziv; }
+
+    public int getZagadjenost() {
+        return zagadjenost;
+    }
+
+    public void setZagadjenost(int zagadjenost) {
+        if(zagadjenost<1 || zagadjenost>10)throw new IllegalArgumentException();
+        this.zagadjenost = zagadjenost;
+    }
 }
